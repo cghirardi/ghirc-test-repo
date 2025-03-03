@@ -1,0 +1,34 @@
+# .github/start-build.yml
+name: Start Build
+on:
+  pull_request:
+    types: [ opened, edited, reopened, synchronize, ready_for_review ]
+    branches: [ main ]
+
+concurrency:
+  group: start-build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  REF: ${{ github.ref }}
+
+jobs:
+  aws-sdk-pr-build:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::332186240596:role/GitHubRole
+          role-session-name: GitHubActions
+          aws-region: us-west-2
+      - name: Download Build Script
+        run: |
+          aws s3 cp s3://aws-sdk-github-assets-alpha-us-west-2/test-script.sh ./.build-scripts/test-script.sh --no-progress
+          chmod +x ./.build-scripts/test-script.sh
+      - name: Start SDK Build
+        run: |
+          ./.build-scripts/test-script.sh "$REF"

@@ -31,4 +31,4 @@ jobs:
           chmod +x ./.build-scripts/pull-request-build-v1.sh
       - name: Start SDK Build
         run: |
-          ./.build-scripts/pull-request-build-v1.sh --getRef "$REF"
+          ./.build-scripts/pull-request-build-v1.sh --gitRef "$REF"

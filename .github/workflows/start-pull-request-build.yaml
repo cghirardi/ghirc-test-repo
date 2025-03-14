@@ -33,4 +33,4 @@ jobs:
           chmod +x ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION
       - name: Start SDK Build
         run: |
-          ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --gitRef "$REF"
+          ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --git-ref "$REF"

@@ -1,16 +1,16 @@
-# .github/start-build.yml
-name: Start Build
+name: Start SDK Build
 on:
   pull_request:
     types: [ opened, edited, reopened, synchronize, ready_for_review ]
     branches: [ main ]
 
 concurrency:
-  group: start-build-${{ github.ref }}
+  group: start-pull-request-build-${{ github.ref }}
   cancel-in-progress: true
 
 env:
   REF: ${{ github.ref }}
+  IAM_ROLE_ARN: 'arn:aws:iam::332186240596:role/GitHubRole'
 
 jobs:
   aws-sdk-pr-build:
@@ -22,13 +22,13 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::332186240596:role/GitHubRole
-          role-session-name: GitHubActions
+          role-to-assume: "$IAM_ROLE_ARN"
+          role-session-name: PullRequestBuildGitHubAction
           aws-region: us-west-2
       - name: Download Build Script
         run: |
-          aws s3 cp s3://aws-sdk-github-assets-alpha-us-west-2/test-script.sh ./.build-scripts/test-script.sh --no-progress
-          chmod +x ./.build-scripts/test-script.sh
+          aws s3 cp s3://aws-sdk-builds-github-assets-alpha-us-west-2/pull-request-build-v1.sh ./.build-scripts/pull-request-build-v1.sh --no-progress
+          chmod +x ./.build-scripts/pull-request-build-v1.sh
       - name: Start SDK Build
         run: |
-          ./.build-scripts/test-script.sh "$REF"
+          ./.build-scripts/pull-request-build-v1.sh --getRef "$REF"

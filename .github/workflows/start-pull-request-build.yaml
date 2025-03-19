@@ -10,7 +10,7 @@ concurrency:
 
 env:
   REF: ${{ github.ref }}
-  IAM_ROLE_ARN: 'arn:aws:iam::332186240596:role/GitHubRole'
+  IAM_ROLE_ARN: 'arn:aws:iam::332186240596:role/GhircTestRepoGitHubRole'
   DOWNLOAD_FOLDER: '.build-scripts/'
   SCRIPT_LOCATION: 'workflows/start-pull-request-build/pull-request-build-v1.sh'
 

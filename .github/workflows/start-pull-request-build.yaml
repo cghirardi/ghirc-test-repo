@@ -32,4 +32,4 @@ jobs:
           chmod +x ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION
       - name: Start SDK Build
         run: |
-          ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --git-commit "$GITHUB_SHA" --git-ref "$GITHUB_REF"
+          ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --git-repo "$GITHUB_REPOSITORY" --git-commit "$GITHUB_SHA" --git-ref "$GITHUB_REF"

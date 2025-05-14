@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  IAM_ROLE_ARN: '<REPLACE WITH ROLE ARN>'
+  IAM_ROLE_ARN: 'arn:aws:iam::332186240596:role/GhircTestRepoGitHubRole'
   DOWNLOAD_FOLDER: '.build-scripts/'
   SCRIPT_LOCATION: 'workflows/start-pull-request-build/pull-request-build-v1.sh'
 

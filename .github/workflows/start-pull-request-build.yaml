@@ -1,6 +1,6 @@
 name: Start SDK Build
 on:
-  pull_request:
+  pull_request: # TODO: This should change to submitted
     types: [ opened, reopened, synchronize, ready_for_review, edited ]
     branches: [ main ]
 
@@ -9,8 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  REF: ${{ github.ref }}
-  IAM_ROLE_ARN: 'arn:aws:iam::332186240596:role/GhircTestRepoGitHubRole'
+  IAM_ROLE_ARN: '<REPLACE WITH ROLE ARN>'
   DOWNLOAD_FOLDER: '.build-scripts/'
   SCRIPT_LOCATION: 'workflows/start-pull-request-build/pull-request-build-v1.sh'
 
@@ -33,4 +32,4 @@ jobs:
           chmod +x ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION
       - name: Start SDK Build
         run: |
-          ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --git-ref "$REF"
+          ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --git-commit "$GITHUB_SHA" --git-ref "$GITHUB_REF"

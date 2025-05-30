@@ -1,7 +1,7 @@
 name: Start SDK Build
 on:
   pull_request:
-    types: [ submitted ]
+    types: [opened, reopened, synchronize, ready_for_review, edited]
     branches: [ main ]
 
 concurrency:

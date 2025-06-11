@@ -32,4 +32,5 @@ jobs:
           chmod +x ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION
       - name: Start SDK Build
         run: |
-          ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --git-repo "$GITHUB_REPOSITORY" --git-branch "$GITHUB_HEAD_REF"
+          ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --git-repo "$GITHUB_REPOSITORY" --git-branch "$GITHUB_HEAD_REF" --git-commit "$GITHUB_SHA"
+        timeout-minutes: 510 # 8.5 hours

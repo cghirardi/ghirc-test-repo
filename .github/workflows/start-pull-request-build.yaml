@@ -32,5 +32,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --git-repo "$GITHUB_REPOSITORY" --git-branch "$GITHUB_HEAD_REF" --git-commit "$GITHUB_SHA"
+          ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --git-repo "$GITHUB_REPOSITORY" --git-branch "$GITHUB_HEAD_REF" --git-commit ${{ github.event.pull_request.head.sha }}
         timeout-minutes: 510 # 8.5 hours

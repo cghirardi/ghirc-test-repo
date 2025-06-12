@@ -17,6 +17,7 @@ jobs:
   aws-sdk-pr-build:
     runs-on: ubuntu-latest
     permissions:
+      issues: write
       id-token: write
       contents: read
     steps:

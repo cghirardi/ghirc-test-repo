@@ -18,7 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       issues: write
-      pull-requests: write
       id-token: write
       contents: read
     steps:

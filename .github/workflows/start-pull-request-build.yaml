@@ -32,9 +32,9 @@ jobs:
         run: |
           aws s3 cp s3://aws-sdk-builds-github-assets-alpha-us-west-2/$SCRIPT_LOCATION ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --no-progress
           chmod +x ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION
-      - name: Start SDK Build
+      - name: Build Pull Request
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --git-repo "${GITHUB_REPOSITORY}" --git-branch "${GITHUB_HEAD_REF}" --git-commit ${{ github.event.pull_request.head.sha }} --git-pr-number ${{ github.event.pull_request.number }}
+          ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --git-repo "${{ github.repository }}" --git-branch "${{ github.head_ref }}" --git-commit ${{ github.event.pull_request.head.sha }} --git-pr-number ${{ github.event.pull_request.number }}
         timeout-minutes: 510 # 8.5 hours

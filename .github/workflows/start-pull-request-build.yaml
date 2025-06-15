@@ -1,7 +1,7 @@
 name: Start SDK Build
 on:
   pull_request:
-    types: [opened, reopened, synchronize, ready_for_review, edited]
+    types: [ submitted ]
     branches: [ main ]
 
 concurrency:
@@ -15,6 +15,7 @@ env:
 
 jobs:
   aws-sdk-pr-build:
+    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     permissions:
       issues: write
